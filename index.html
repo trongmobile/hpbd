@@ -1,212 +1,489 @@
 <!doctype html>
 <html lang="vi">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>HPBD — Make someone's day magical</title>
-  <meta name="description" content="Tạo thiệp chúc mừng sinh nhật cá nhân hóa và chia sẻ bằng một đường link. Không cần đăng nhập, không cần cài đặt.">
-  <meta name="theme-color" content="#d62f5c">
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="HPBD">
-  <meta property="og:title" content="HPBD — Make someone's day magical">
-  <meta property="og:description" content="Tạo thiệp chúc mừng sinh nhật cá nhân hóa và chia sẻ bằng một đường link.">
-  <meta property="og:url" content="https://trongmobile.github.io/hpbd/">
-  <meta property="og:image" content="https://trongmobile.github.io/hpbd/assets/og/og-image.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="HPBD — Make someone's day magical">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="HPBD — Make someone's day magical">
-  <meta name="twitter:description" content="Tạo thiệp chúc mừng sinh nhật cá nhân hóa và chia sẻ bằng một đường link.">
-  <meta name="twitter:image" content="https://trongmobile.github.io/hpbd/assets/og/og-image.png">
-  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>HPBD — Make someone's day magical</title>
+    <meta
+      name="description"
+      content="Tạo thiệp chúc mừng sinh nhật cá nhân hóa và chia sẻ bằng một đường link. Không cần đăng nhập, không cần cài đặt."
+    />
+    <meta name="theme-color" content="#d62f5c" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="HPBD" />
+    <meta property="og:title" content="HPBD — Make someone's day magical" />
+    <meta
+      property="og:description"
+      content="Tạo thiệp chúc mừng sinh nhật cá nhân hóa và chia sẻ bằng một đường link."
+    />
+    <meta property="og:url" content="https://trongmobile.github.io/hpbd/" />
+    <meta
+      property="og:image"
+      content="https://trongmobile.github.io/hpbd/assets/og/og-image.png"
+    />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="HPBD — Make someone's day magical" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="HPBD — Make someone's day magical" />
+    <meta
+      name="twitter:description"
+      content="Tạo thiệp chúc mừng sinh nhật cá nhân hóa và chia sẻ bằng một đường link."
+    />
+    <meta
+      name="twitter:image"
+      content="https://trongmobile.github.io/hpbd/assets/og/og-image.png"
+    />
+    <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Dancing+Script:wght@600;700&family=Lora:ital,wght@0,500;0,600;1,500&family=Pacifico&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Dancing+Script:wght@600;700&family=Lora:ital,wght@0,500;0,600;1,500&family=Pacifico&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Quicksand:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    />
 
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/themes.css">
-  <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/themes.css" />
+    <link rel="stylesheet" href="css/animations.css" />
 
-  <script>
-    // Chọn view sớm để tránh nháy form tạo thiệp khi mở link thiệp.
-    (function () {
-      var r = document.documentElement;
-      r.dataset.view = /[?&](name|message|theme)=/.test(location.search) ? 'greeting' : 'creator';
-      if (location.protocol === 'file:') r.dataset.file = '1';
-    })();
-  </script>
-  <script type="module" src="js/app.js"></script>
-</head>
-<body>
-  <p class="file-warning" role="alert">
-    Trang dùng ES modules nên cần chạy qua HTTP server (ví dụ <code>python3 -m http.server</code>), không mở trực tiếp bằng file://.
-  </p>
-  <noscript><p class="file-warning" style="display:block">HPBD cần bật JavaScript để hoạt động.</p></noscript>
+    <script>
+      // Chọn view sớm để tránh nháy form tạo thiệp khi mở link thiệp.
+      (function () {
+        var r = document.documentElement;
+        r.dataset.view = /[?&](name|message|theme)=/.test(location.search)
+          ? "greeting"
+          : "creator";
+        if (location.protocol === "file:") r.dataset.file = "1";
+      })();
+    </script>
+    <script type="module" src="js/app.js"></script>
 
-  <!-- ============ TRANG TẠO THIỆP ============ -->
-  <div id="creator-view">
-    <header class="site-header">
-      <a class="brand" href="./" aria-label="HPBD — trang chủ">
-        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
-          <rect width="32" height="32" rx="10" fill="#d62f5c"/>
-          <rect x="7" y="17" width="18" height="8" rx="2.5" fill="#fff"/>
-          <path d="M7 20.5c2.2 2 3.6 2 5.4 0 1.8 2 3.4 2 5.2 0 1.8 2 3.6 2 5.4 0" stroke="#ffb3c6" stroke-width="1.6" fill="none"/>
-          <rect x="15.2" y="11" width="1.6" height="6" rx=".8" fill="#fff"/>
-          <path d="M16 6.2c1.7 1.6 1.8 3 0 4.2-1.8-1.2-1.7-2.6 0-4.2z" fill="#ffd166"/>
-        </svg>
-        <span class="brand-name">HPBD</span>
-      </a>
-      <p class="tagline">Make someone's day magical.</p>
-    </header>
+    <!-- GoatCounter: đếm lượt truy cập, không cookie. Thay YOUR_CODE bằng site code của bạn. -->
+    <script>
+      // Link thiệp chứa tên/lời chúc trong query nên chỉ ghi nhận 2 đường dẫn: / và /greeting.
+      window.goatcounter = {
+        path: function () {
+          return document.documentElement.dataset.view === "greeting"
+            ? "/greeting"
+            : "/";
+        },
+      };
+    </script>
+    <script
+      data-goatcounter="https://hpbd.goatcounter.com/count"
+      async
+      src="//gc.zgo.at/count.js"
+    ></script>
+  </head>
+  <body>
+    <p class="file-warning" role="alert">
+      Trang dùng ES modules nên cần chạy qua HTTP server (ví dụ
+      <code>python3 -m http.server</code>), không mở trực tiếp bằng file://.
+    </p>
+    <noscript
+      ><p class="file-warning" style="display: block">
+        HPBD cần bật JavaScript để hoạt động.
+      </p></noscript
+    >
 
-    <div id="url-alert" class="alert" role="alert" hidden>
-      <span id="url-alert-text"></span>
-      <button type="button" class="alert-close" aria-label="Đóng thông báo">×</button>
+    <!-- ============ TRANG TẠO THIỆP ============ -->
+    <div id="creator-view">
+      <header class="site-header">
+        <a class="brand" href="./" aria-label="HPBD — trang chủ">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="10" fill="#d62f5c" />
+            <rect x="7" y="17" width="18" height="8" rx="2.5" fill="#fff" />
+            <path
+              d="M7 20.5c2.2 2 3.6 2 5.4 0 1.8 2 3.4 2 5.2 0 1.8 2 3.6 2 5.4 0"
+              stroke="#ffb3c6"
+              stroke-width="1.6"
+              fill="none"
+            />
+            <rect x="15.2" y="11" width="1.6" height="6" rx=".8" fill="#fff" />
+            <path
+              d="M16 6.2c1.7 1.6 1.8 3 0 4.2-1.8-1.2-1.7-2.6 0-4.2z"
+              fill="#ffd166"
+            />
+          </svg>
+          <span class="brand-name">HPBD</span>
+        </a>
+        <p class="tagline">Make someone's day magical.</p>
+      </header>
+
+      <div id="url-alert" class="alert" role="alert" hidden>
+        <span id="url-alert-text"></span>
+        <button type="button" class="alert-close" aria-label="Đóng thông báo">
+          ×
+        </button>
+      </div>
+
+      <main>
+        <section class="hero">
+          <div class="hero-copy">
+            <p class="eyebrow">Thiệp sinh nhật · Chia sẻ bằng một đường link</p>
+            <h1>
+              Make Their Birthday Magical <span aria-hidden="true">✨</span>
+            </h1>
+            <p class="lead">
+              Create a beautiful birthday surprise and share a little happiness.
+            </p>
+            <a class="btn btn-primary" href="#create">Bắt đầu tạo thiệp</a>
+          </div>
+          <svg
+            class="hero-art"
+            viewBox="0 0 360 320"
+            role="img"
+            aria-label="Bánh sinh nhật, bóng bay và confetti"
+          >
+            <ellipse
+              cx="180"
+              cy="296"
+              rx="120"
+              ry="12"
+              fill="#2b1d33"
+              opacity=".1"
+            />
+            <g class="balloon b1">
+              <path
+                d="M62 138c-6 40 22 60 8 118"
+                stroke="#b78aa0"
+                stroke-width="2"
+                fill="none"
+              />
+              <ellipse cx="62" cy="96" rx="30" ry="38" fill="#ff8fab" />
+              <ellipse
+                cx="52"
+                cy="82"
+                rx="7"
+                ry="11"
+                fill="#fff"
+                opacity=".35"
+              />
+              <path d="M62 133l-5 8h10z" fill="#ff8fab" />
+            </g>
+            <g class="balloon b2">
+              <path
+                d="M304 120c8 44-18 70-6 136"
+                stroke="#b78aa0"
+                stroke-width="2"
+                fill="none"
+              />
+              <ellipse cx="304" cy="80" rx="28" ry="36" fill="#7c9cff" />
+              <ellipse
+                cx="295"
+                cy="66"
+                rx="6"
+                ry="10"
+                fill="#fff"
+                opacity=".35"
+              />
+              <path d="M304 115l-5 8h10z" fill="#7c9cff" />
+            </g>
+            <g class="balloon b3">
+              <path
+                d="M268 186c-2 34 12 52 0 84"
+                stroke="#b78aa0"
+                stroke-width="2"
+                fill="none"
+              />
+              <ellipse cx="268" cy="156" rx="22" ry="29" fill="#ffd166" />
+              <ellipse
+                cx="261"
+                cy="146"
+                rx="5"
+                ry="8"
+                fill="#fff"
+                opacity=".4"
+              />
+              <path d="M268 184l-4 7h8z" fill="#ffd166" />
+            </g>
+            <rect
+              x="84"
+              y="226"
+              width="192"
+              height="64"
+              rx="16"
+              fill="#ffd1dc"
+            />
+            <path
+              d="M84 244q16 20 32 0t32 0 32 0 32 0 32 0 32 0v-8H84z"
+              fill="#fff"
+            />
+            <rect
+              x="114"
+              y="170"
+              width="132"
+              height="58"
+              rx="14"
+              fill="#ffb3c6"
+            />
+            <path d="M114 188q16 18 33 0t33 0 33 0 33 0v-8H114z" fill="#fff" />
+            <rect
+              x="146"
+              y="120"
+              width="68"
+              height="52"
+              rx="12"
+              fill="#ff8fab"
+            />
+            <path d="M146 138q11 14 22 0t23 0 23 0v-6h-68z" fill="#fff" />
+            <circle cx="132" cy="214" r="5" fill="#d62f5c" />
+            <circle cx="180" cy="216" r="5" fill="#7c9cff" />
+            <circle cx="228" cy="214" r="5" fill="#ffd166" />
+            <rect x="162" y="96" width="5" height="26" rx="2" fill="#7c9cff" />
+            <rect
+              x="177.5"
+              y="92"
+              width="5"
+              height="30"
+              rx="2"
+              fill="#ffd166"
+            />
+            <rect x="193" y="96" width="5" height="26" rx="2" fill="#7c9cff" />
+            <ellipse
+              class="flame f1"
+              cx="164.5"
+              cy="88"
+              rx="5"
+              ry="9"
+              fill="#ffb703"
+            />
+            <ellipse
+              class="flame f2"
+              cx="180"
+              cy="84"
+              rx="5"
+              ry="9"
+              fill="#ffb703"
+            />
+            <ellipse
+              class="flame f3"
+              cx="195.5"
+              cy="88"
+              rx="5"
+              ry="9"
+              fill="#ffb703"
+            />
+            <g class="bits">
+              <rect
+                x="118"
+                y="40"
+                width="10"
+                height="10"
+                rx="2"
+                fill="#d62f5c"
+                transform="rotate(20 123 45)"
+              />
+              <circle cx="236" cy="38" r="6" fill="#7c9cff" />
+              <rect
+                x="196"
+                y="22"
+                width="9"
+                height="9"
+                rx="2"
+                fill="#ffd166"
+                transform="rotate(-18 200 26)"
+              />
+              <path d="M150 58l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#ffd166" />
+              <circle cx="30" cy="190" r="5" fill="#ffb3c6" />
+              <rect
+                x="326"
+                y="190"
+                width="9"
+                height="9"
+                rx="2"
+                fill="#d62f5c"
+                transform="rotate(30 330 194)"
+              />
+            </g>
+          </svg>
+        </section>
+
+        <section class="workbench" id="create" aria-label="Tạo thiệp">
+          <form id="card-form" class="card-form" novalidate autocomplete="off">
+            <h2 class="section-title">Tạo thiệp của bạn</h2>
+
+            <div class="field">
+              <label for="name"
+                >Tên người nhận
+                <span class="req" aria-hidden="true">*</span></label
+              >
+              <input
+                id="name"
+                name="name"
+                type="text"
+                maxlength="60"
+                placeholder="Ví dụ: Minh Anh"
+                required
+                aria-describedby="name-error"
+              />
+              <p class="error" id="name-error" role="alert"></p>
+            </div>
+
+            <div class="field">
+              <label for="message"
+                >Lời chúc sinh nhật
+                <span class="req" aria-hidden="true">*</span></label
+              >
+              <textarea
+                id="message"
+                name="message"
+                rows="6"
+                maxlength="1000"
+                placeholder="Viết lời chúc thật đặc biệt dành cho người ấy..."
+                required
+                aria-describedby="message-error msg-count"
+              ></textarea>
+              <div class="field-foot">
+                <p class="error" id="message-error" role="alert"></p>
+                <span class="counter" id="msg-count" aria-live="polite"
+                  >0 / 1.000</span
+                >
+              </div>
+            </div>
+
+            <fieldset class="field">
+              <legend>Chọn theme</legend>
+              <div
+                id="theme-grid"
+                class="theme-grid"
+                role="radiogroup"
+                aria-label="Theme thiệp"
+              ></div>
+            </fieldset>
+
+            <fieldset class="field">
+              <legend>Tùy chọn hiệu ứng</legend>
+              <label class="switch">
+                <input type="checkbox" id="opt-anim" role="switch" checked />
+                <span class="switch-ui" aria-hidden="true"></span>
+                <span class="switch-text"
+                  ><strong>Hiệu ứng động</strong
+                  ><small>Confetti, hạt trang trí và chuyển cảnh</small></span
+                >
+              </label>
+              <label class="switch">
+                <input type="checkbox" id="opt-music" role="switch" />
+                <span class="switch-ui" aria-hidden="true"></span>
+                <span class="switch-text"
+                  ><strong>Nhạc nền</strong
+                  ><small
+                    >Giai điệu Happy Birthday — mặc định tắt, chỉ phát khi bạn
+                    bật</small
+                  ></span
+                >
+              </label>
+            </fieldset>
+
+            <div class="actions">
+              <button type="button" class="btn btn-ghost" id="btn-preview">
+                Xem trước thiệp
+              </button>
+              <button type="submit" class="btn btn-primary" id="btn-create">
+                Tạo thiệp sinh nhật
+              </button>
+            </div>
+
+            <section id="result" class="result" aria-live="polite" hidden>
+              <h3>🎉 Thiệp đã sẵn sàng!</h3>
+              <p class="result-hint">
+                Gửi liên kết này cho người nhận — họ không cần tài khoản.
+              </p>
+              <input
+                id="share-url"
+                class="share-url"
+                type="text"
+                readonly
+                aria-label="Liên kết chia sẻ"
+              />
+              <p id="url-note" class="url-note" hidden></p>
+              <div class="result-actions">
+                <button type="button" class="btn btn-primary" id="btn-copy">
+                  Sao chép liên kết
+                </button>
+                <a
+                  class="btn btn-ghost"
+                  id="btn-open"
+                  href="#"
+                  target="_blank"
+                  rel="noopener"
+                  >Mở thiệp</a
+                >
+                <button
+                  type="button"
+                  class="btn btn-ghost"
+                  id="btn-share"
+                  hidden
+                >
+                  Chia sẻ…
+                </button>
+                <button type="button" class="btn btn-text" id="btn-edit">
+                  Chỉnh sửa thiệp
+                </button>
+                <button type="button" class="btn btn-text" id="btn-new">
+                  Tạo thiệp mới
+                </button>
+              </div>
+            </section>
+          </form>
+
+          <aside class="preview-col" aria-label="Xem trước thiệp">
+            <div class="preview-head">
+              <h2>Xem trước trực tiếp</h2>
+              <div class="seg" role="group" aria-label="Kích thước xem trước">
+                <button type="button" data-size="mobile" aria-pressed="true">
+                  Điện thoại
+                </button>
+                <button type="button" data-size="desktop" aria-pressed="false">
+                  Máy tính
+                </button>
+              </div>
+            </div>
+            <div class="preview-frame" id="preview-frame" data-size="mobile">
+              <div class="preview-host" id="preview-host"></div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-text preview-toggle"
+              id="btn-stage-toggle"
+            >
+              Xem màn hình chúc mừng →
+            </button>
+          </aside>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>
+          Dữ liệu thiệp nằm hoàn toàn trong đường link — không lưu trên máy chủ.
+          · Made with love ❤️
+        </p>
+      </footer>
     </div>
 
-    <main>
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Thiệp sinh nhật · Chia sẻ bằng một đường link</p>
-          <h1>Make Their Birthday Magical <span aria-hidden="true">✨</span></h1>
-          <p class="lead">Create a beautiful birthday surprise and share a little happiness.</p>
-          <a class="btn btn-primary" href="#create">Bắt đầu tạo thiệp</a>
-        </div>
-        <svg class="hero-art" viewBox="0 0 360 320" role="img" aria-label="Bánh sinh nhật, bóng bay và confetti">
-          <ellipse cx="180" cy="296" rx="120" ry="12" fill="#2b1d33" opacity=".1"/>
-          <g class="balloon b1">
-            <path d="M62 138c-6 40 22 60 8 118" stroke="#b78aa0" stroke-width="2" fill="none"/>
-            <ellipse cx="62" cy="96" rx="30" ry="38" fill="#ff8fab"/>
-            <ellipse cx="52" cy="82" rx="7" ry="11" fill="#fff" opacity=".35"/>
-            <path d="M62 133l-5 8h10z" fill="#ff8fab"/>
-          </g>
-          <g class="balloon b2">
-            <path d="M304 120c8 44-18 70-6 136" stroke="#b78aa0" stroke-width="2" fill="none"/>
-            <ellipse cx="304" cy="80" rx="28" ry="36" fill="#7c9cff"/>
-            <ellipse cx="295" cy="66" rx="6" ry="10" fill="#fff" opacity=".35"/>
-            <path d="M304 115l-5 8h10z" fill="#7c9cff"/>
-          </g>
-          <g class="balloon b3">
-            <path d="M268 186c-2 34 12 52 0 84" stroke="#b78aa0" stroke-width="2" fill="none"/>
-            <ellipse cx="268" cy="156" rx="22" ry="29" fill="#ffd166"/>
-            <ellipse cx="261" cy="146" rx="5" ry="8" fill="#fff" opacity=".4"/>
-            <path d="M268 184l-4 7h8z" fill="#ffd166"/>
-          </g>
-          <rect x="84" y="226" width="192" height="64" rx="16" fill="#ffd1dc"/>
-          <path d="M84 244q16 20 32 0t32 0 32 0 32 0 32 0 32 0v-8H84z" fill="#fff"/>
-          <rect x="114" y="170" width="132" height="58" rx="14" fill="#ffb3c6"/>
-          <path d="M114 188q16 18 33 0t33 0 33 0 33 0v-8H114z" fill="#fff"/>
-          <rect x="146" y="120" width="68" height="52" rx="12" fill="#ff8fab"/>
-          <path d="M146 138q11 14 22 0t23 0 23 0v-6h-68z" fill="#fff"/>
-          <circle cx="132" cy="214" r="5" fill="#d62f5c"/><circle cx="180" cy="216" r="5" fill="#7c9cff"/><circle cx="228" cy="214" r="5" fill="#ffd166"/>
-          <rect x="162" y="96" width="5" height="26" rx="2" fill="#7c9cff"/>
-          <rect x="177.5" y="92" width="5" height="30" rx="2" fill="#ffd166"/>
-          <rect x="193" y="96" width="5" height="26" rx="2" fill="#7c9cff"/>
-          <ellipse class="flame f1" cx="164.5" cy="88" rx="5" ry="9" fill="#ffb703"/>
-          <ellipse class="flame f2" cx="180" cy="84" rx="5" ry="9" fill="#ffb703"/>
-          <ellipse class="flame f3" cx="195.5" cy="88" rx="5" ry="9" fill="#ffb703"/>
-          <g class="bits">
-            <rect x="118" y="40" width="10" height="10" rx="2" fill="#d62f5c" transform="rotate(20 123 45)"/>
-            <circle cx="236" cy="38" r="6" fill="#7c9cff"/>
-            <rect x="196" y="22" width="9" height="9" rx="2" fill="#ffd166" transform="rotate(-18 200 26)"/>
-            <path d="M150 58l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#ffd166"/>
-            <circle cx="30" cy="190" r="5" fill="#ffb3c6"/>
-            <rect x="326" y="190" width="9" height="9" rx="2" fill="#d62f5c" transform="rotate(30 330 194)"/>
-          </g>
-        </svg>
-      </section>
+    <!-- ============ TRANG THIỆP ĐƯỢC CHIA SẺ ============ -->
+    <div id="greeting-view"></div>
 
-      <section class="workbench" id="create" aria-label="Tạo thiệp">
-        <form id="card-form" class="card-form" novalidate autocomplete="off">
-          <h2 class="section-title">Tạo thiệp của bạn</h2>
+    <!-- Xem trước toàn màn hình -->
+    <div
+      id="preview-modal"
+      class="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Xem trước thiệp"
+      hidden
+    >
+      <button type="button" class="modal-close" id="modal-close">
+        ← Quay lại chỉnh sửa
+      </button>
+      <div class="modal-host" id="modal-host"></div>
+    </div>
 
-          <div class="field">
-            <label for="name">Tên người nhận <span class="req" aria-hidden="true">*</span></label>
-            <input id="name" name="name" type="text" maxlength="60" placeholder="Ví dụ: Minh Anh" required aria-describedby="name-error">
-            <p class="error" id="name-error" role="alert"></p>
-          </div>
-
-          <div class="field">
-            <label for="message">Lời chúc sinh nhật <span class="req" aria-hidden="true">*</span></label>
-            <textarea id="message" name="message" rows="6" maxlength="1000" placeholder="Viết lời chúc thật đặc biệt dành cho người ấy..." required aria-describedby="message-error msg-count"></textarea>
-            <div class="field-foot">
-              <p class="error" id="message-error" role="alert"></p>
-              <span class="counter" id="msg-count" aria-live="polite">0 / 1.000</span>
-            </div>
-          </div>
-
-          <fieldset class="field">
-            <legend>Chọn theme</legend>
-            <div id="theme-grid" class="theme-grid" role="radiogroup" aria-label="Theme thiệp"></div>
-          </fieldset>
-
-          <fieldset class="field">
-            <legend>Tùy chọn hiệu ứng</legend>
-            <label class="switch">
-              <input type="checkbox" id="opt-anim" role="switch" checked>
-              <span class="switch-ui" aria-hidden="true"></span>
-              <span class="switch-text"><strong>Hiệu ứng động</strong><small>Confetti, hạt trang trí và chuyển cảnh</small></span>
-            </label>
-            <label class="switch">
-              <input type="checkbox" id="opt-music" role="switch">
-              <span class="switch-ui" aria-hidden="true"></span>
-              <span class="switch-text"><strong>Nhạc nền</strong><small>Giai điệu Happy Birthday — mặc định tắt, chỉ phát khi bạn bật</small></span>
-            </label>
-          </fieldset>
-
-          <div class="actions">
-            <button type="button" class="btn btn-ghost" id="btn-preview">Xem trước thiệp</button>
-            <button type="submit" class="btn btn-primary" id="btn-create">Tạo thiệp sinh nhật</button>
-          </div>
-
-          <section id="result" class="result" aria-live="polite" hidden>
-            <h3>🎉 Thiệp đã sẵn sàng!</h3>
-            <p class="result-hint">Gửi liên kết này cho người nhận — họ không cần tài khoản.</p>
-            <input id="share-url" class="share-url" type="text" readonly aria-label="Liên kết chia sẻ">
-            <p id="url-note" class="url-note" hidden></p>
-            <div class="result-actions">
-              <button type="button" class="btn btn-primary" id="btn-copy">Sao chép liên kết</button>
-              <a class="btn btn-ghost" id="btn-open" href="#" target="_blank" rel="noopener">Mở thiệp</a>
-              <button type="button" class="btn btn-ghost" id="btn-share" hidden>Chia sẻ…</button>
-              <button type="button" class="btn btn-text" id="btn-edit">Chỉnh sửa thiệp</button>
-              <button type="button" class="btn btn-text" id="btn-new">Tạo thiệp mới</button>
-            </div>
-          </section>
-        </form>
-
-        <aside class="preview-col" aria-label="Xem trước thiệp">
-          <div class="preview-head">
-            <h2>Xem trước trực tiếp</h2>
-            <div class="seg" role="group" aria-label="Kích thước xem trước">
-              <button type="button" data-size="mobile" aria-pressed="true">Điện thoại</button>
-              <button type="button" data-size="desktop" aria-pressed="false">Máy tính</button>
-            </div>
-          </div>
-          <div class="preview-frame" id="preview-frame" data-size="mobile">
-            <div class="preview-host" id="preview-host"></div>
-          </div>
-          <button type="button" class="btn btn-text preview-toggle" id="btn-stage-toggle">Xem màn hình chúc mừng →</button>
-        </aside>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <p>Dữ liệu thiệp nằm hoàn toàn trong đường link — không lưu trên máy chủ. · Made with love ❤️</p>
-    </footer>
-  </div>
-
-  <!-- ============ TRANG THIỆP ĐƯỢC CHIA SẺ ============ -->
-  <div id="greeting-view"></div>
-
-  <!-- Xem trước toàn màn hình -->
-  <div id="preview-modal" class="modal" role="dialog" aria-modal="true" aria-label="Xem trước thiệp" hidden>
-    <button type="button" class="modal-close" id="modal-close">← Quay lại chỉnh sửa</button>
-    <div class="modal-host" id="modal-host"></div>
-  </div>
-
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
-</body>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
 </html>
